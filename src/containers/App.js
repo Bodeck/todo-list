@@ -2,12 +2,22 @@ import React from 'react';
 import uuid from 'uuid';
 import style from './App.css';
 import Title from '../components/Title';
+import TodoList from '../components/TodoList';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [{
+        id: 1,
+        text: 'complete module 20'
+      }, {
+        id: 2,
+        text: 'check react documentation'
+      }, {
+        id: 3,
+        text: 'publish branch on github'
+      }]
     };
   }
 
@@ -29,7 +39,7 @@ class App extends React.Component {
     return (
       <div className={style.TodoApp}>
         <Title todoCount={this.state.data.length} />
-        Tutaj pojawią się komponenty naszej aplikacji.
+        <TodoList data={this.state.data} remove={this.removeTodo} />
       </div>
     );
   }
