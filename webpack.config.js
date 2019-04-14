@@ -1,12 +1,25 @@
 const path = require('path');
+const HTMLTemplatePlugin = require('html-webpack-plugin');
+const OptimizeJsPlugin = require('optimize-js-plugin');
+
+const plugins = [new HTMLTemplatePlugin({
+  template: 'src/index.html',
+  filename: 'index.html',
+  inject: 'body'
+})];
 
 module.exports = (env) => {
   const environment = env;
+  if (environment === 'production') {
+    plugins.push(new OptimizeJsPlugin({
+      sourceMap: false
+    }))
+  }
   return {
     mode: environment,
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname,'build'),
+      path: path.resolve(__dirname, 'build'),
       filename: 'app.bundle.js'
     },
     module: {
@@ -18,7 +31,7 @@ module.exports = (env) => {
         {
           test: /\.css$/,
           use: [
-            { loader: 'style-loader'},
+            { loader: 'style-loader' },
             {
               loader: 'css-loader',
               options: {
@@ -28,6 +41,7 @@ module.exports = (env) => {
           ]
         }
       ]
-    }
+    },
+    plugins
   }
 };
