@@ -6,7 +6,7 @@ const TodoList = (props) => {
   return (
     <ul className={style.TodoList}>
       {todos.map((todo) =>
-        <li key={todo.id} onClick ={(e,id)=>props.remove(id)}>
+        <li key={todo.id} onClick = {(e) => props.remove(todo.id)} >
           {todo.text}
         </li>
       )
