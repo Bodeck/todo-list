@@ -1,4 +1,5 @@
 import React from 'react';
+import ToDo from './Todo';
 import style from './TodoList.css';
 
 const TodoList = (props) => {
@@ -6,9 +7,8 @@ const TodoList = (props) => {
   return (
     <ul className={style.TodoList}>
       {todos.map((todo) =>
-        <li key={todo.id} onClick = {(e) => props.remove(todo.id)} >
-          {todo.text}
-        </li>
+        <ToDo key={todo.id} id= {todo.id} onClick={props.remove}
+          toDoText={todo.text} />
       )
       }
     </ul>
